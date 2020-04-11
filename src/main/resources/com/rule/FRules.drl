@@ -1,0 +1,27 @@
+package com
+
+import com.javainuse.model.Application
+import com.javainuse.model.GenericFeatures
+
+rule "getgenericRule01"
+dialect "mvel"
+	when
+		$app: Application(features contains "update")
+	then
+	    System.out.println( "getgenericRule01 executed" );
+	    GenericFeatures g1 = new GenericFeatures("retrieve info");
+        GenericFeatures g2 = new GenericFeatures("update info");
+        insertLogical(g1);
+        insertLogical(g2);
+end
+
+
+rule "getgenericRule02"
+dialect "mvel"
+	when
+		$app: Application(features contains "display")
+	then
+	    System.out.println( "getgenericRule02 executed" );
+	    GenericFeatures g1 = new GenericFeatures("retrieve info");
+	    insertLogical(g1);
+end

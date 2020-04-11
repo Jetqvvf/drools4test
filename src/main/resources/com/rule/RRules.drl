@@ -1,0 +1,61 @@
+package com
+
+import com.javainuse.model.Threats
+import com.javainuse.model.Attacks
+import com.javainuse.model.Application
+
+rule "getattackRule01"
+dialect "mvel"
+	when
+		$threat: Threats(name == "authorization")
+	then
+	    System.out.println( "getattackRule01 executed" );
+	    insertLogical(new Attacks("A5"))
+end
+
+rule "getattackRule02"
+dialect "mvel"
+	when
+		$threat: Threats(name == "authorization")
+		$app: Application(risks contains "multiple roles")
+	then
+	    System.out.println( "getattackRule02 executed" );
+	    insertLogical(new Attacks("privilege escalation"))
+end
+
+rule "getattackRule03"
+dialect "mvel"
+	when
+		$threat: Threats(name == "authorization")
+		$app: Application(risks contains "multiple tenates")
+	then
+	    System.out.println( "getattackRule03 executed" );
+	    insertLogical(new Attacks("horizontal privilege escalation"))
+end
+
+rule "getattackRule04"
+dialect "mvel"
+	when
+		$threat: Threats(name == "confidentiality")
+	then
+	    System.out.println( "getattackRule04 executed" );
+	    insertLogical(new Attacks("A3"))
+end
+
+rule "getattackRule05"
+dialect "mvel"
+	when
+		$threat: Threats(name == "transaction authorization")
+	then
+	    System.out.println( "getattackRule05 executed" );
+	    insertLogical(new Attacks("unauthorized transaction"))
+end
+
+rule "getattackRule06"
+dialect "mvel"
+	when
+		$threat: Threats(name == "non-repudiation")
+	then
+	    System.out.println( "getattackRule06 executed" );
+	    insertLogical(new Attacks("lack of logging"))
+end

@@ -1,0 +1,22 @@
+package com
+
+import com.javainuse.model.Application
+import com.javainuse.model.GenericFeatures
+import com.javainuse.model.Threats
+
+rule "getthreatRule01"
+dialect "mvel"
+	when
+	    $generic: GenericFeatures(name == "retrieve info")
+	then
+	    //authorization, confidentiality, transaction authorization, non-repudiation
+	    Threats threats1 = new Threats("authorization");
+	    Threats threats2 = new Threats("confidentiality");
+	    Threats threats3 = new Threats("transaction authorization");
+	    Threats threats4 = new Threats("non-repudiation");
+	    insertLogical(threats1);
+	    insertLogical(threats2);
+	    insertLogical(threats3);
+	    insertLogical(threats4);
+	    System.out.println( "getthreatRule01 executed" );
+end

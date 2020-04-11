@@ -1,0 +1,91 @@
+package com
+
+import com.javainuse.model.Application
+import com.javainuse.model.Attacks
+import com.javainuse.model.AttackVector
+
+rule "AttackVectorRule01"
+dialect "mvel"
+	when
+		$attack: Attacks(name == "A5")
+	then
+	    System.out.println( "AttackVectorRule01 executed" );
+	    insertLogical(new AttackVector("request param manipulation"))
+end
+
+rule "AttackVectorRule02"
+dialect "mvel"
+	when
+		$attack: Attacks(name == "unauthorized transaction")
+		$app: Application(techs contains "classic web")
+	then
+	    System.out.println( "AttackVectorRule02 executed" );
+	    insertLogical(new AttackVector("CSRF"))
+end
+
+rule "AttackVectorRule03"
+dialect "mvel"
+	when
+		$attack: Attacks(name == "unauthorized transaction")
+		$app: Application(techs contains "RestAPI")
+	then
+	    System.out.println( "AttackVectorRule03 executed" );
+	    insertLogical(new AttackVector("CSRF"))
+end
+
+rule "AttackVectorRule04"
+dialect "mvel"
+	when
+		$attack: Attacks(name == "A5")
+	then
+	    System.out.println( "AttackVectorRule04 executed" );
+	    insertLogical(new AttackVector("attempt post authentication functions"))
+end
+
+rule "AttackVectorRule05"
+dialect "mvel"
+	when
+		$attack: Attacks(name == "privilege escalation")
+	then
+	    System.out.println( "AttackVectorRule05 executed" );
+	    insertLogical(new AttackVector("attempt privileged functions"))
+end
+
+rule "AttackVectorRule06"
+dialect "mvel"
+	when
+		$attack: Attacks(name == "horizontal privilege escalation")
+	then
+	    System.out.println( "AttackVectorRule06 executed" );
+	    insertLogical(new AttackVector("request param manipulation"))
+end
+
+rule "AttackVectorRule07"
+dialect "mvel"
+	when
+		$attack: Attacks(name == "A3")
+	then
+	    System.out.println( "AttackVectorRule07 executed" );
+	    insertLogical(new AttackVector("clear text cache"))
+	    insertLogical(new AttackVector("sniff network connections"))
+end
+
+rule "AttackVectorRule08"
+dialect "mvel"
+	when
+		$attack: Attacks(name == "A3")
+		$app: Application(techs contains "classic web")
+	then
+	    System.out.println( "AttackVectorRule08 executed" );
+	    insertLogical(new AttackVector("web logs"))
+end
+
+rule "AttackVectorRule09"
+dialect "mvel"
+	when
+		$attack: Attacks(name == "A3")
+		$app: Application(techs contains "RestAPI")
+	then
+	    System.out.println( "AttackVectorRule09 executed" );
+	    insertLogical(new AttackVector("web logs"))
+end

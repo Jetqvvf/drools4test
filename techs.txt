@@ -1,0 +1,2 @@
+app1:classic web,JSON Web
+app2:RestAPI

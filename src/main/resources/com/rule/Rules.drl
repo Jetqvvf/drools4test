@@ -1,0 +1,28 @@
+package com.rule
+
+import com.javainuse.model.Application
+
+rule "getthreat01"
+	when 
+		app: Application(biz contains "health", features contains "account")
+	then
+		System.out.println("find one threat");
+	end
+/*
+rule "interact01"
+    when
+    		app: Application(threat contains "leak")
+    	then
+    		System.out.println("Is this app using web?");
+    		modify(app){
+    		setTech()
+    		}
+    	end
+
+rule "getattack01"
+	when
+		app: Application(threat contains "leak", tech contains "web")
+	then
+		System.out.println("find one attack");
+	end
+	*/

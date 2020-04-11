@@ -1,0 +1,2 @@
+app1:internet facing,multiple roles,multiple tenates
+app2:multiple roles
